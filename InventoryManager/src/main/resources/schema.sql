@@ -1,0 +1,21 @@
+CREATE TABLE IF NOT EXISTS Computadores (
+    idEquipamento BIGINT AUTO_INCREMENT PRIMARY KEY,
+    sigla VARCHAR(255),
+    local VARCHAR(255),
+    nome VARCHAR(255),
+    contato VARCHAR(255),
+    ramal VARCHAR(255),
+    marca VARCHAR(255),
+    modelo VARCHAR(255),
+    numeroSerieCpu VARCHAR(255) NOT NULL,
+    processador VARCHAR(255),
+    marcaMonitor VARCHAR(255),
+    numeroSerieMonitor VARCHAR(255),
+    tamanhoMonitor DOUBLE,
+    teclado VARCHAR(255),
+    numeroSerieTeclado VARCHAR(255),
+    mouse VARCHAR(255),
+    numeroSerieMouse VARCHAR(255),
+    responsavel VARCHAR(255),
+    dataAlteracao DATETIME
+);
