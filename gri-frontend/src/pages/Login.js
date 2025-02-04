@@ -38,7 +38,7 @@ const Button = styled.button`
 `;
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [login, setLogin] = useState("");
   const [senha, setSenha] = useState("");
   const navigate = useNavigate();
 
@@ -46,7 +46,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post("http://localhost:8080/auth/login", {
-        email,
+        login,
         senha,
       });
       localStorage.setItem("token", response.data.token);
@@ -61,10 +61,10 @@ const Login = () => {
       <h2>Login</h2>
       <Form onSubmit={handleLogin}>
         <Input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          type="login"
+          placeholder="Login"
+          value={login}
+          onChange={(e) => setLogin(e.target.value)}
         />
         <Input
           type="password"
