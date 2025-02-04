@@ -1,52 +1,71 @@
-import AppRoutes from "./routes/AppRoutes";
 import { useState } from "react";
+import axios from "axios";
 import "./styles.css";
 
 function App() {
-  const [login, setLogin] = useState("");
-  const [password, setPassword] = useState("");
+  const [usuario, setUsuario] = useState("");
+  const [senha, setSenha] = useState("");
+  const [role, setRole] = useState(null); // Guarda o perfil do usuário
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:8080/auth/login", {
+        username: usuario,
+        password: senha,
+      });
+  
+      if (response.data) {
+        setRole(response.data.role);
+      } else {
+        alert("Usuário ou senha inválidos!");
+      }
+    } catch (error) {
+      alert("Erro ao fazer login!");
+    }
+  };
 
   return (
     <div className="container">
       <div className="container-login">
         <div className="wrap-login">
-          <form className="login-form">
+          <form className="login-form" onSubmit={handleLogin}>
             <span className="login-form-title"> Bem vindo </span>
-
-            <span className="login-form-title">
-            </span>
 
             <div className="wrap-input">
               <input
-                className={login !== "" ? "has-val input" : "input"}
-                type="login"
-                value={login}
-                onChange={(e) => setLogin(e.target.value)}
+                className={usuario !== "" ? "has-val input" : "input"}
+                type="text"
+                value={usuario}
+                onChange={(e) => setUsuario(e.target.value)}
               />
               <span className="focus-input" data-placeholder="Login"></span>
             </div>
 
             <div className="wrap-input">
               <input
-                className={password !== "" ? "has-val input" : "input"}
+                className={senha !== "" ? "has-val input" : "input"}
                 type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={senha}
+                onChange={(e) => setSenha(e.target.value)}
               />
-              <span className="focus-input" data-placeholder="Password"></span>
+              <span className="focus-input" data-placeholder="Senha"></span>
             </div>
 
             <div className="container-login-form-btn">
-              <button className="login-form-btn">Login</button>
-            </div>
-
-            <div className="text-center">
-              <span className="txt1">Não possui conta? </span>
-              <a className="txt2" href="#">
-                Criar conta
-              </a>
+              <button type="submit" className="login-form-btn">
+                Login
+              </button>
             </div>
           </form>
+
+          {role && (
+            <h2 className="role-message">
+              {role === "ADMIN"
+                ? "Bem-vindo, Administrador"
+                : "Bem-vindo, Usuário Comum"}
+            </h2>
+          )}
         </div>
       </div>
     </div>

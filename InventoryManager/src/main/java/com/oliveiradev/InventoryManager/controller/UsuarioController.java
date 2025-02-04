@@ -13,7 +13,7 @@ import com.oliveiradev.InventoryManager.model.Usuario;
 import com.oliveiradev.InventoryManager.service.UsuarioService;
 
 @RestController
-@RequestMapping("/usuario")
+@RequestMapping("/usuarios")
 public class UsuarioController {
 
     @Autowired

@@ -37,8 +37,8 @@ const Button = styled.button`
   }
 `;
 
-const Login = () => {
-  const [login, setLogin] = useState("");
+const Login = ({ setUser }) => {
+  const [usuario, setUsuario] = useState("");
   const [senha, setSenha] = useState("");
   const navigate = useNavigate();
 
@@ -46,13 +46,25 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post("http://localhost:8080/auth/login", {
-        login,
-        senha,
+        username: usuario,
+        password: senha,
       });
-      localStorage.setItem("token", response.data.token);
-      navigate("/dashboard");
+
+      if (response.data) {
+        setUser({
+          name: response.data.name,
+          role: response.data.role,
+        });
+
+        // Redireciona com base no tipo de usuário
+        if (response.data.role === "ADMIN") {
+          navigate("/admin");
+        } else {
+          navigate("/dashboard");
+        }
+      }
     } catch (error) {
-      alert("Erro ao fazer login");
+      alert("Usuário ou senha inválidos!");
     }
   };
 
@@ -61,10 +73,10 @@ const Login = () => {
       <h2>Login</h2>
       <Form onSubmit={handleLogin}>
         <Input
-          type="login"
-          placeholder="Login"
-          value={login}
-          onChange={(e) => setLogin(e.target.value)}
+          type="text"
+          placeholder="Usuário"
+          value={usuario}
+          onChange={(e) => setUsuario(e.target.value)}
         />
         <Input
           type="password"

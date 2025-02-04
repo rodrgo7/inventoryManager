@@ -1,6 +1,6 @@
 com\oliveiradev\InventoryManager\repository\ComputadorRepository.class
 com\oliveiradev\InventoryManager\service\ComputadorService.class
 com\oliveiradev\InventoryManager\Startup.class
+com\oliveiradev\InventoryManager\controller\ComputadorController.class
 com\oliveiradev\InventoryManager\infra\DatabaseConn.class
 com\oliveiradev\InventoryManager\model\Computador.class
-com\oliveiradev\InventoryManager\controller\ComputadorController.class
